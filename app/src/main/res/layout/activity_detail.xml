@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingHorizontal="20dp"
+            tools:context=".ui.detail.DetailStoryActivity"
+            tools:ignore="UselessParent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp">
+
+                    <ImageView
+                        android:id="@+id/iv_detail_photo"
+                        android:transitionName="profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/empty_image"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/app_name"
+                        android:background="@drawable/rounded_background"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:gravity="top"
+                        android:background="@color/white"
+                        android:layout_gravity="top">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imageViewProfile"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/baseline_cruelty_free_24"
+                            android:layout_marginEnd="10dp"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="@android:color/white"
+                            android:contentDescription="@string/app_name"/>
+
+                        <TextView
+                            android:id="@+id/tv_detail_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/username"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_bold"/>
+                    </LinearLayout>
+
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_detail_description"
+                android:transitionName="description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:lines="2"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteY="107dp"
+            android:layout_gravity="center"
+            tools:visibility="visible" />
+    </LinearLayout>
+</ScrollView>

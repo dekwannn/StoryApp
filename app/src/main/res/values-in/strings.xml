@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="login">Masuk</string>
+    <string name="login_text">Silakan masuk ke akun Anda</string>
+    <string name="email">Surel</string>
+    <string name="password">Kata Sandi</string>
+    <string name="signup_text">Belum punya akun?</string>
+    <string name="logout">Keluar</string>
+    <string name="already_have_an_account">Sudah punya akun</string>
+    <string name="let_s_started">Ayo Mulai</string>
+    <string name="sign_up">Daftar</string>
+    <string name="already_have_an_account_sign_in">Sudah punya akun?</string>
+    <string name="name">Nama</string>
+    <string name="register">Daftar</string>
+    <string name="copyright_2024">Hak Cipta © 2024</string>
+    <string name="title">Judul</string>
+    <string name="description">Deskripsi</string>
+    <string name="please_wait"> Mohon tunggu…</string>
+    <string name="add">Tambah</string>
+    <string name="home">Beranda</string>
+    <string name="settings">Pengaturan</string>
+    <string name="gallery">Galeri</string>
+    <string name="camera">Kamera</string>
+    <string name="fill_your_description_here">Isi deskripsi Anda di sini</string>
+    <string name="upload">Unggah</string>
+    <string name="username">Nama Pengguna</string>
+    <string name="failed_to_pick_image">Gagal memilih gambar Anda\n</string>
+    <string name="empty_description_warning">Silakan isi deskripsi</string>
+    <string name="empty_image_warning">Silakan pilih gambar\n</string>
+    <string name="language">Bahasa</string>
+    <string name="switch_language">Ganti Bahasa</string>
+</resources>

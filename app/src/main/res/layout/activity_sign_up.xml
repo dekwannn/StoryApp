@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".ui.auth.signup.SignUpActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/sign_up"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_semibold"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/already_have_an_account_sign_in" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/login"
+            android:textColor="@color/blue"/>
+
+    </LinearLayout>
+
+    
+
+    <EditText
+        android:id="@+id/ed_register_name"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="@string/name"
+        android:maxLines="1"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_back_dark_blue5_15">
+
+        <com.widi.storyapp.custom.CustomEmailEditText
+            android:id="@+id/ed_register_email"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/email"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_regular"
+            android:maxLines="1"
+            android:autofillHints="" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_back_dark_blue5_15">
+
+        <com.widi.storyapp.custom.CustomPasswordEditText
+            android:id="@+id/ed_register_password"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/baseline_remove_red_eye_24"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/app_name" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/register"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_bold"
+        android:textAllCaps="false"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_back_primary_15"/>
+
+</LinearLayout>

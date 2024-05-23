@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".ui.auth.login.LoginActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/login"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_semibold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/login_text" />
+
+    <com.widi.storyapp.custom.CustomEmailEditText
+        android:id="@+id/ed_login_email"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="@string/email"
+        android:maxLines="1"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_back_dark_blue5_15">
+
+        <com.widi.storyapp.custom.CustomPasswordEditText
+            android:id="@+id/ed_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/password"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_regular"
+            android:maxLines="1"/>
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/baseline_remove_red_eye_24"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/app_name" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/login"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_bold"
+        android:textAllCaps="false"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_back_primary_15"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_text"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_regular"/>
+
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:layout_marginStart="5dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/blue"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

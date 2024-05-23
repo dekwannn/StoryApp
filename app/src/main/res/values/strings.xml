@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="login">Login</string>
+    <string name="login_text">Please login to your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signup_text">Don’t have an account?</string>
+    <string name="logout">Logout</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="let_s_started">Let\'s Started</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account_sign_in">Already have an account?</string>
+    <string name="name">Name</string>
+    <string name="register">Register</string>
+    <string name="copyright_2024">Copyright © 2024</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="please_wait">Please Wait…</string>
+    <string name="add">add</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="fill_your_description_here">Fill your description here</string>
+    <string name="upload">Upload</string>
+    <string name="username">Username</string>
+    <string name="failed_to_pick_image">Your image failed to load\n</string>
+    <string name="empty_description_warning">Please fill the description</string>
+    <string name="empty_image_warning">Please choose the image\n</string>
+    <string name="language">Language</string>
+    <string name="switch_language">Switch Language</string>
+</resources>
