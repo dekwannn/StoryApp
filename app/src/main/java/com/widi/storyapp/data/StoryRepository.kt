@@ -15,13 +15,14 @@ class StoryRepository private constructor(
     suspend fun getStories(): StoryResponse = apiService.getStories()
 
     suspend fun getDetailStory(id: String) = apiService.getDetailStory(id)
-
     suspend fun addStory(
         multipartBody: MultipartBody.Part,
         requestBodyDescription: RequestBody,
         latRequestBody: RequestBody?,
         lonRequestBody: RequestBody?
     ) = apiService.uploadImage(multipartBody, requestBodyDescription, latRequestBody, lonRequestBody)
+
+    suspend fun getStoriesWithLocation() = apiService.getStoriesWithLocation()
 
     suspend fun saveToken(token: String) = pref.saveToken(token)
 

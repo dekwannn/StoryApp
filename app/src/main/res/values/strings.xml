@@ -29,4 +29,5 @@
     <string name="empty_image_warning">Please choose the image\n</string>
     <string name="language">Language</string>
     <string name="switch_language">Switch Language</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

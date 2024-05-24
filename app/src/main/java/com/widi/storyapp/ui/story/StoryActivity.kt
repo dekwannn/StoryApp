@@ -16,6 +16,7 @@ import com.widi.storyapp.data.Result
 import com.widi.storyapp.databinding.ActivityStoryBinding
 import com.widi.storyapp.ui.adapter.StoryAdapter
 import com.widi.storyapp.ui.main.ViewModelFactory
+import com.widi.storyapp.ui.maps.MapsActivity
 import com.widi.storyapp.ui.settings.SettingsActivity
 import com.widi.storyapp.ui.story.add.AddStoryActivity
 
@@ -103,6 +104,10 @@ class StoryActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
+                true
+            }
+            R.id.action_map -> {
+                startActivity(Intent(this, MapsActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
