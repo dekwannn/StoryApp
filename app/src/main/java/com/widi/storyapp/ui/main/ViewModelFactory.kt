@@ -10,6 +10,7 @@ import com.widi.storyapp.di.Injection
 import com.widi.storyapp.ui.auth.login.LoginViewModel
 import com.widi.storyapp.ui.auth.signup.SignUpViewModel
 import com.widi.storyapp.ui.detail.DetailViewModel
+import com.widi.storyapp.ui.maps.MapsViewModel
 import com.widi.storyapp.ui.story.StoryViewModel
 import com.widi.storyapp.ui.story.add.AddStoryViewModel
 
@@ -41,6 +42,8 @@ class ViewModelFactory private constructor(
             return DetailViewModel(storyRepository) as T
         }else if (modelClass.isAssignableFrom(AddStoryViewModel::class.java)) {
             return AddStoryViewModel(storyRepository) as T
+        } else if (modelClass.isAssignableFrom(MapsViewModel::class.java)) {
+            return MapsViewModel(storyRepository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

@@ -3,6 +3,7 @@ package com.widi.storyapp.ui.story.add
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
 import com.widi.storyapp.R
 import com.widi.storyapp.data.Result
 import com.widi.storyapp.databinding.ActivityAddStoryBinding
@@ -35,6 +39,9 @@ class AddStoryActivity : AppCompatActivity() {
     private var currentImageUri: Uri? = null
     private var lat:Float? = null
     private var lon:Float? = null
+    private lateinit var mMap: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var mapFragment: SupportMapFragment
 
     private val factory = ViewModelFactory.getInstance(this)
     private val addStoryViewModel by viewModels<AddStoryViewModel> {
@@ -78,6 +85,13 @@ class AddStoryActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 uploadStory()
+            }
+            buttonLocation.setOnClickListener {
+                if(buttonLocation.isChecked){
+                    getMyLocation()
+                }else{
+                    mapFragment.view?.visibility = android.view.View.GONE
+                }
             }
         }
 
@@ -163,6 +177,40 @@ class AddStoryActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+
+    private val requestPermissionLauncherLocation =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            }
+        }
+    private fun getMyLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap.isMyLocationEnabled = true
+            mapFragment.view?.visibility = android.view.View.VISIBLE
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    lat = location.latitude.toFloat()
+                    lon = location.longitude.toFloat()
+                } else {
+                    Toast.makeText(
+                        this@AddStoryActivity,
+                        "Location is not found. Try Again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        } else {
+            requestPermissionLauncherLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
     }
 
     companion object {

@@ -11,19 +11,19 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.widi.storyapp.data.response.story.ListStoryItem
 import com.bumptech.glide.Glide
+import com.widi.storyapp.data.response.story.Story
 import com.widi.storyapp.databinding.StoryItemLayoutBinding
 import com.widi.storyapp.ui.detail.DetailActivity
 
-class StoryAdapter(private var storyList: List<ListStoryItem>) : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
+class StoryAdapter(private var storyList: List<Story>) : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: StoryItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val imgPhoto: ImageView = binding.ivItemPhoto
         private val tvName: TextView = binding.tvItemName
         private val tvDescription: TextView = binding.tvDescriptionStory
 
-        fun bind(item: ListStoryItem) {
+        fun bind(item: Story) {
             Glide.with(itemView.context)
                 .load(item.photoUrl)
                 .into(imgPhoto)
@@ -60,7 +60,7 @@ class StoryAdapter(private var storyList: List<ListStoryItem>) : RecyclerView.Ad
         return storyList.size
     }
 
-    fun updateData(newStoryList: List<ListStoryItem>) {
+    fun updateData(newStoryList: List<Story>) {
         val diffCallback = StoryDiffCallback(storyList, newStoryList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         storyList = newStoryList
@@ -68,8 +68,8 @@ class StoryAdapter(private var storyList: List<ListStoryItem>) : RecyclerView.Ad
     }
 
     class StoryDiffCallback(
-        private val oldList: List<ListStoryItem>,
-        private val newList: List<ListStoryItem>
+        private val oldList: List<Story>,
+        private val newList: List<Story>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int {

@@ -30,4 +30,10 @@
     <string name="language">Language</string>
     <string name="switch_language">Switch Language</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+    <string name="style_error">can\'t find map style</string>
+    <string name="add_your_location">Add your current location?</string>
 </resources>
