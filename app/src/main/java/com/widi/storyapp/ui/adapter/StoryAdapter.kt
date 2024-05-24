@@ -5,10 +5,9 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,20 +15,30 @@ import com.widi.storyapp.data.response.story.Story
 import com.widi.storyapp.databinding.StoryItemLayoutBinding
 import com.widi.storyapp.ui.detail.DetailActivity
 
-class StoryAdapter(private var storyList: List<Story>) : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
+class StoryAdapter :
+    PagingDataAdapter<Story, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: StoryItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val imgPhoto: ImageView = binding.ivItemPhoto
-        private val tvName: TextView = binding.tvItemName
-        private val tvDescription: TextView = binding.tvDescriptionStory
 
-        fun bind(item: Story) {
-            Glide.with(itemView.context)
-                .load(item.photoUrl)
-                .into(imgPhoto)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding = StoryItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
+    }
 
-            tvName.text = item.name
-            tvDescription.text = item.description
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val user = getItem(position)
+        if (user != null) {
+            holder.bind(user)
+        }
+    }
+
+    class MyViewHolder(private val binding: StoryItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(story: Story){
+
+            binding.tvItemName.text = story.name
+            binding.tvDescriptionStory.text = story.description
+            Glide.with(binding.root.context)
+                .load(story.photoUrl)
+                .into(binding.ivItemPhoto)
 
             binding.root.setOnClickListener {
                 val optionsCompat: ActivityOptionsCompat =
@@ -41,53 +50,20 @@ class StoryAdapter(private var storyList: List<Story>) : RecyclerView.Adapter<St
                     )
 
                 val intentDetailActivity = Intent(binding.root.context,DetailActivity::class.java)
-                intentDetailActivity.putExtra(DetailActivity.EXTRA_ID,item.id)
+                intentDetailActivity.putExtra(DetailActivity.EXTRA_ID,story.id)
                 binding.root.context.startActivity(intentDetailActivity,optionsCompat.toBundle())
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = StoryItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(storyList[position])
-    }
-
-    override fun getItemCount(): Int {
-        return storyList.size
-    }
-
-    fun updateData(newStoryList: List<Story>) {
-        val diffCallback = StoryDiffCallback(storyList, newStoryList)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        storyList = newStoryList
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    class StoryDiffCallback(
-        private val oldList: List<Story>,
-        private val newList: List<Story>
-    ) : DiffUtil.Callback() {
-
-        override fun getOldListSize(): Int {
-            return oldList.size
-        }
-
-        override fun getNewListSize(): Int {
-            return newList.size
-        }
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
-        }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            val oldItem = oldList[oldItemPosition]
-            val newItem = newList[newItemPosition]
-            return oldItem == newItem
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

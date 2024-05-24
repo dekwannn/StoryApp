@@ -5,15 +5,13 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.widi.storyapp.R
-import com.widi.storyapp.data.Result
 import com.widi.storyapp.databinding.ActivityStoryBinding
+import com.widi.storyapp.ui.adapter.LoadingStateAdapter
 import com.widi.storyapp.ui.adapter.StoryAdapter
 import com.widi.storyapp.ui.main.ViewModelFactory
 import com.widi.storyapp.ui.maps.MapsActivity
@@ -23,7 +21,6 @@ import com.widi.storyapp.ui.story.add.AddStoryActivity
 class StoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryBinding
-    private lateinit var storyAdapter: StoryAdapter
     private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
     private val mainViewModel: StoryViewModel by viewModels<StoryViewModel> {
         factory
@@ -39,16 +36,15 @@ class StoryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.blue)))
 
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvStory.layoutManager = layoutManager
+
         binding.fab.setOnClickListener {
             val addIntent = Intent(this@StoryActivity, AddStoryActivity::class.java)
             startActivity(addIntent)
         }
 
-        setupRecyclerView()
-        observeViewModel()
-        mainViewModel.getStory()
-
-
+        getData()
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -58,40 +54,15 @@ class StoryActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
-    private fun setupRecyclerView() {
-        storyAdapter = StoryAdapter(emptyList())
-        binding.rvStory.apply {
-            layoutManager = LinearLayoutManager(this@StoryActivity)
-            adapter = storyAdapter
-        }
-    }
-
-    private fun observeViewModel() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this@StoryActivity)
-        builder.setView(R.layout.loading)
-        val dialog: AlertDialog = builder.create()
-
-        mainViewModel.responseResult.observe(this) { result ->
-            when (result) {
-                is Result.Loading -> {
-                    dialog.show()
-                }
-
-                is Result.Success -> {
-                    dialog.dismiss()
-                    storyAdapter.updateData(result.data.listStory)
-                }
-                is Result.Error -> {
-                    dialog.dismiss()
-                    Toast.makeText(
-                        this@StoryActivity,
-                        result.error,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                else -> {}
+    private fun getData() {
+        val adapter = StoryAdapter()
+        binding.rvStory.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
             }
+        )
+        mainViewModel.storyList.observe(this) {
+            adapter.submitData(lifecycle, it)
         }
     }
 

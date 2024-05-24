@@ -1,7 +1,14 @@
 package com.widi.storyapp.data
 
+import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.widi.storyapp.data.database.StoryDatabase
 import com.widi.storyapp.data.pref.StoryReferences
-import com.widi.storyapp.data.response.story.StoryResponse
+import com.widi.storyapp.data.response.story.Story
 import com.widi.storyapp.data.retrofit.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -9,10 +16,22 @@ import okhttp3.RequestBody
 class StoryRepository private constructor(
     private val apiService: ApiService,
     private val pref: StoryReferences,
+    private val database: StoryDatabase
 ) {
     fun getToken() = pref.getToken()
 
-    suspend fun getStories(): StoryResponse = apiService.getStories()
+    @OptIn(ExperimentalPagingApi::class)
+    fun getStories(): LiveData<PagingData<Story>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 3
+            ),
+            pagingSourceFactory = {
+                database.storyDao().getAllStory()
+            } ,
+            remoteMediator = StoryRemoteMediator(database, apiService)
+        ).liveData
+    }
 
     suspend fun getDetailStory(id: String) = apiService.getDetailStory(id)
     suspend fun addStory(
@@ -34,9 +53,9 @@ class StoryRepository private constructor(
         @Volatile
         private var instance: StoryRepository? = null
 
-        fun getInstance(apiService: ApiService, pref: StoryReferences): StoryRepository =
+        fun getInstance(apiService: ApiService, pref: StoryReferences, database: StoryDatabase): StoryRepository =
             instance ?: synchronized(this) {
-                instance ?: StoryRepository(apiService, pref).also { instance = it }
+                instance ?: StoryRepository(apiService, pref, database).also { instance = it }
             }
     }
 }

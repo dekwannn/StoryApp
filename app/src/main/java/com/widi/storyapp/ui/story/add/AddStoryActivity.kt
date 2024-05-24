@@ -16,8 +16,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.widi.storyapp.R
 import com.widi.storyapp.data.Result
 import com.widi.storyapp.databinding.ActivityAddStoryBinding
@@ -33,15 +38,15 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 
-class AddStoryActivity : AppCompatActivity() {
+class AddStoryActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityAddStoryBinding
     private var currentImageUri: Uri? = null
-    private var lat:Float? = null
-    private var lon:Float? = null
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var mapFragment: SupportMapFragment
+    private var lat:Float? = null
+    private var lon:Float? = null
 
     private val factory = ViewModelFactory.getInstance(this)
     private val addStoryViewModel by viewModels<AddStoryViewModel> {
@@ -71,6 +76,12 @@ class AddStoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this@AddStoryActivity)
+        mapFragment.view?.visibility = android.view.View.GONE
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
@@ -179,6 +190,23 @@ class AddStoryActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.isIndoorLevelPickerEnabled = true
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMapToolbarEnabled = true
+
+        val dicodingSpace = LatLng(-6.8957643, 107.6338462)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(dicodingSpace)
+                .title("Dicoding Space")
+                .snippet("Batik Kumeli No.50")
+        )
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(dicodingSpace, 15f))
+    }
 
     private val requestPermissionLauncherLocation =
         registerForActivityResult(
