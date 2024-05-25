@@ -3,7 +3,7 @@
     <string name="app_name">StoryApp</string>
     <string name="login">Masuk</string>
     <string name="login_text">Silakan masuk ke akun Anda</string>
-    <string name="email">Surel</string>
+    <string name="email">Email</string>
     <string name="password">Kata Sandi</string>
     <string name="signup_text">Belum punya akun?</string>
     <string name="logout">Keluar</string>
@@ -30,4 +30,14 @@
     <string name="empty_image_warning">Silakan pilih gambar\n</string>
     <string name="language">Bahasa</string>
     <string name="switch_language">Ganti Bahasa</string>
+    <string name="title_activity_maps">Maps Activity</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satelit</string>
+    <string name="terrain_type">Terain</string>
+    <string name="hybrid_type">Hybrid</string>
+    <string name="style_error">Tidak dapat menemukan gaya peta</string>
+    <string name="add_your_location">Tambahkan lokasi Anda saat ini?</string>
+    <string name="retry">Coba lagi</string>
+    <string name="password_length_error">Kata sandi harus minimal 8 karakter</string>
+
 </resources>

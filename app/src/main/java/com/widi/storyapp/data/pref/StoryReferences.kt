@@ -3,7 +3,6 @@ package com.widi.storyapp.data.pref
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -15,7 +14,6 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "us
 
 class StoryReferences private constructor(private val dataStore: DataStore<Preferences>) {
 
-    private val themeKey = booleanPreferencesKey("theme_setting")
     private val language = stringPreferencesKey("en")
     private val token = stringPreferencesKey("token")
 
@@ -36,13 +34,6 @@ class StoryReferences private constructor(private val dataStore: DataStore<Prefe
             preferences.remove(token)
         }
     }
-
-    fun getThemeSetting(): Flow<Boolean> {
-        return dataStore.data.map { preferences ->
-            preferences[themeKey] ?: false
-        }
-    }
-
 
     suspend fun saveLanguageSetting(language: String) {
         dataStore.edit { preferences ->

@@ -37,4 +37,5 @@
     <string name="style_error">can\'t find map style</string>
     <string name="add_your_location">Add your current location?</string>
     <string name="retry">Retry</string>
+    <string name="password_length_error">Password must be at least 8 characters</string>
 </resources>
